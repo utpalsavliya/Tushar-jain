@@ -34,7 +34,7 @@ int higherprecedence(char op1 , char op2)
   int op2Weight = GetOperatorWeight(op2);
 
   
-  return op1Weight>= op2Weight ?  1:0;
+  return (op1Weight>= op2Weight ?  1:0);
 
 }
 
@@ -52,6 +52,7 @@ string itp(string exp)
      if(isdigit(ch)){
        res+=ch;
        
+       
      }
      else{
         if(ch=='(')
@@ -63,18 +64,24 @@ string itp(string exp)
             res+=S.top();
             S.pop();
             
+            
           }
           S.pop();
         }
-        else if(higherprecedence(S.top(),ch)==1)
+        else if(higherprecedence(S.top(),ch)==0)
         S.push(ch);
         
-        else if(higherprecedence(S.top(),ch)==0)
+        else if(higherprecedence(S.top(),ch)==1)
         {
           while(S.top()=='/'||S.top()=='*'||S.top()=='-'||S.top()=='+'){
-            res+=S.top();
+           
+             
+           res+=S.top();
+            S.pop();
+            
             
           }
+          S.push(ch);
         }
      }
  
@@ -82,9 +89,13 @@ string itp(string exp)
   
   while(S.empty()!=0)
   {
-    res+=S.top();
+   res+=S.top();
     S.pop();
+    
+    
   }
+  
+  
   return res;
 }
 int main(){
@@ -98,3 +109,4 @@ int main(){
   
   
   }
+
