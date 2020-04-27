@@ -70,7 +70,7 @@ string itp(string exp)
       }
       else if(higherprecedence(S.top(),ch)==1)
       {                   //Pop till '(' or lower precedence operand encountered
-        while(higherprecedence(S.top(),ch)==1 && S.top()!='('){
+        while(higherprecedence(S.top(),ch)==1 && S.top()!='('){   //Error when S.empty() after loop empties stack
           res += ' ';
           res+=S.top();
           S.pop();
