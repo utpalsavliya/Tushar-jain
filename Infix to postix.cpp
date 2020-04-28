@@ -57,7 +57,7 @@ string itp(string exp)
       else if(ch==')')
       {
         while(!S.empty() && S.top()!='(')
-        {                  //Pop and add to result till '(' encountered, or stack filled
+        {                  //Pop and add to result till '(' encountered, or stack empty
           res += ' ';
           res+=S.top();
           S.pop();
@@ -69,8 +69,8 @@ string itp(string exp)
         res += ' ';
       }
       else if(higherprecedence(S.top(),ch)==1)
-      {                   //Pop till '(' or lower precedence operand encountered
-        while(higherprecedence(S.top(),ch)==1 && S.top()!='('){
+      {                   //Pop till '(' or lower precedence operand encountered, or stack empty
+        while(!S.empty() && higherprecedence(S.top(),ch)==1 && S.top()!='('){
           res += ' ';
           res+=S.top();
           S.pop();
