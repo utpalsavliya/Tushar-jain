@@ -40,39 +40,37 @@ string itp(string exp)
   for(i=0;i<exp.length();i++)
   {                        //Iterates over characters
     char ch=exp[i];
-    if(isdigit(ch)){       //Add to result if digit
-      res+=ch;
+    if(ch=='('){
+      S.push(ch);
     }
-    
-    else{                  //Logic for supported operands
-      if(ch=='('){
-        S.push(ch);
-      }
-      else if(ch==')')
-      {
-        while(!S.empty() && S.top()!='(')
-        {                  //Pop and add to result till '(' encountered, or stack empty
-          res += ' ';
-          res+=S.top();
-          S.pop();
-        }
-        S.pop();          //Pop to remove '('
-      }
-      else if(S.empty() || higherprecedence(S.top(),ch)==0){
-        S.push(ch);       //Push on empty stack or if ch precedes top element
+    else if(ch==')')
+    {
+      while(!S.empty() && S.top()!='(')
+      {                  //Pop and add to result till '(' encountered, or stack empty
         res += ' ';
+        res+=S.top();
+        S.pop();
       }
-      else if(higherprecedence(S.top(),ch)==1)
-      {                   //Pop till '(' or lower precedence operand encountered, or stack empty
-        while(!S.empty() && higherprecedence(S.top(),ch)==1 && S.top()!='('){
-          res += ' ';
-          res+=S.top();
-          S.pop();
-        }
-        S.push(ch);       //Push new operand
-        res += ' ';
-      }
+      S.pop();          //Pop to remove '('
     }
+    else if(GetOperatorWeight(ch) == -1){   //Add to result if not a supported operand
+      res += ch;
+    }
+    else if(S.empty() || higherprecedence(S.top(),ch)==0){
+      S.push(ch);       //Push on empty stack or if ch precedes top element
+      res += ' ';
+    }
+    else if(higherprecedence(S.top(),ch)==1)
+    {                   //Pop till '(' or lower precedence operand encountered, or stack empty
+      while(!S.empty() && higherprecedence(S.top(),ch)==1 && S.top()!='('){
+        res += ' ';
+        res+=S.top();
+        S.pop();
+      }
+      S.push(ch);       //Push new operand
+      res += ' ';
+    }
+  
   }
   while(!S.empty())
   {         //To empty stack after expression iteration completed
