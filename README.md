@@ -8,6 +8,7 @@ This program takes an infix expression as an input and outputs a corresponding p
 - __'/' '*'__ - Multiplication and division.
 - __'+' '-'__ - Addition and Substraction.
 
+> Note - we are checking __'S.empty()'__ condition at every stage when we are making changes in Stack as S.top() is unexpected behaviour when stack is empty
 > Note - The program currently doesn't support space between characters, and will end the input on first occurence of any space character.
 
 ## TestCases.md
