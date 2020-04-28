@@ -20,10 +20,6 @@ int GetOperatorWeight(char op)
   case '^':
     weight = 3;
     break;
-  case '(':
-  case ')':
-    weight = 4;
-    break;
   }
   return weight;
 }
@@ -47,9 +43,7 @@ string itp(string exp)
     if(isdigit(ch)){       //Add to result if digit
       res+=ch;
     }
-    else if(GetOperatorWeight(ch) == -1){   //Add to result if not digit or supported operand
-      res += ch;
-    }
+    
     else{                  //Logic for supported operands
       if(ch=='('){
         S.push(ch);
